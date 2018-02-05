@@ -15,8 +15,6 @@
 #import "GPUImageClosingFilter.h"
 #import "GPUImageColorBurnBlendFilter.h"
 #import "GPUImageContrastFilter.h"
-
-
 #import "GPUImageCrosshatchFilter.h"
 #import "GPUImageDarkenBlendFilter.h"
 #import "GPUImageEmbossFilter.h"
@@ -29,37 +27,6 @@
 #import "GPUImageHighPassFilter.h"
 #import "GPUImageLowPassFilter.h"
 #import "GPUImageSketchFilter.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @implementation GHFilterManager
 + (GHFilterManager *)sharedInstance{
@@ -78,19 +45,16 @@
 - (NSArray *)setdataList{
     NSMutableArray *mutableFilterArray = [NSMutableArray arrayWithCapacity:10];
     [mutableFilterArray addObject:[self closingFilter]];
-//    [mutableFilterArray addObject:[self colorBurnBlendFilter]];
     [mutableFilterArray addObject:[self averageLuminanceThresholdFilter]];
     [mutableFilterArray addObject:[self monochromeFilter]];
     [mutableFilterArray addObject:[self contrastFilter]];
     
     [mutableFilterArray addObject:[self crosshatchFilter]];
-//    [mutableFilterArray addObject:[self darkenBlendFilter]];
     [mutableFilterArray addObject:[self embossFilter]];
     [mutableFilterArray addObject:[self exposureFilter]];
     [mutableFilterArray addObject:[self gaussianBlurFilter]];
     [mutableFilterArray addObject:[self gammaFilter]];
     [mutableFilterArray addObject:[self halftoneFilter]];
-//    [mutableFilterArray addObject:[self hardLightBlendFilter]];
     [mutableFilterArray addObject:[self hazeFilter]];
     [mutableFilterArray addObject:[self highPassFilter]];    
     [mutableFilterArray addObject:[self lowPassFilter]];
@@ -124,8 +88,6 @@
     GPUImageContrastFilter *contrastFilter = [[GPUImageContrastFilter alloc]init];
     return contrastFilter;
 }
-
-#pragma mark- new adding
 
 - (GPUImageOutput *)crosshatchFilter{
     

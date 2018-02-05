@@ -1400,7 +1400,7 @@
 				DEVELOPMENT_TEAM = 9KS7AS8359;
 				INFOPLIST_FILE = iOSSystemCamera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkl.hkl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.liaoworking.iOSSystemCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1414,7 +1414,7 @@
 				DEVELOPMENT_TEAM = 9KS7AS8359;
 				INFOPLIST_FILE = iOSSystemCamera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkl.hkl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.liaoworking.iOSSystemCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
