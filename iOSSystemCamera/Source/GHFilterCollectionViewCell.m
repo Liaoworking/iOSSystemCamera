@@ -7,22 +7,35 @@
 //
 
 #import "GHFilterCollectionViewCell.h"
+@interface GHFilterCollectionViewCell ()
+@property (nonatomic,strong)  GPUImageView *videoView;
 
+@end
 @implementation GHFilterCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor redColor];
-        [self configFileterView];
     }
     return self;
 }
 
-- (void)configFileterView{
-    
-    _videoView = [[GPUImageView alloc]initWithFrame:self.contentView.bounds];
-    [self.contentView addSubview:_videoView];
+- (GPUImageView *)videoView{
+    if (!_videoView) {
+        _videoView = [[GPUImageView alloc]initWithFrame:self.contentView.bounds];
+        [self.contentView addSubview:_videoView];
+        
+    }
+    return _videoView;
+}
+
+- (void)setOutput:(GPUImageOutput *)output{
+    _output = output;
+    [self.videoView removeFromSuperview];
+    self.videoView = nil;
+
+    [output addTarget:self.videoView];
     
 }
 

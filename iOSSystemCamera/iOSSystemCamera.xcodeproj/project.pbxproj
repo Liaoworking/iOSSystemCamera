@@ -618,7 +618,6 @@
 		240A5FDB20246C81004A8B6E /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				240A5FDC20246C81004A8B6E /* GPUImage */,
 				240A61EC20246CD4004A8B6E /* GHImagePickViewController.h */,
 				240A61ED20246CD4004A8B6E /* GHImagePickViewController.m */,
 				240A61EF202470DC004A8B6E /* GHTopBarView.h */,
@@ -631,6 +630,7 @@
 				240A61F920259D5F004A8B6E /* GHFilterCollectionViewCell.m */,
 				240A61FB2025A60E004A8B6E /* GHFilterManager.h */,
 				240A61FC2025A60E004A8B6E /* GHFilterManager.m */,
+				240A5FDC20246C81004A8B6E /* GPUImage */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -1400,7 +1400,7 @@
 				DEVELOPMENT_TEAM = 9KS7AS8359;
 				INFOPLIST_FILE = iOSSystemCamera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.liaoworking.iOSSystemCamera;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkl.hkl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1414,7 +1414,7 @@
 				DEVELOPMENT_TEAM = 9KS7AS8359;
 				INFOPLIST_FILE = iOSSystemCamera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.liaoworking.iOSSystemCamera;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkl.hkl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

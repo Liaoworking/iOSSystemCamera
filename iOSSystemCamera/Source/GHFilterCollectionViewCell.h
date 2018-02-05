@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GPUImage.h"
 @interface GHFilterCollectionViewCell : UICollectionViewCell
-@property (nonatomic,strong)  GPUImageView *videoView;
+@property (nonatomic,strong) GPUImageOutput *output;
 
 @end

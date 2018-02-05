@@ -115,7 +115,7 @@
     GHFilterCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHFilterCollectionViewCell" forIndexPath:indexPath];
     
     GPUImageOutput *outPut = self.datalist[indexPath.item];
-    [outPut addTarget:cell.videoView];
+    cell.output = outPut;
     [videoCamera addTarget:outPut];
     
     return cell;
