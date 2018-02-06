@@ -13,6 +13,8 @@
 #import "GHFilterGroupVeiw.h"
 #import "GHFilterCollectionViewCell.h"
 #import "GHFilterManager.h"
+#import <AssetsLibrary/ALAssetsLibrary.h>
+#import <Photos/PHPhotoLibrary.h>
 @interface GHImagePickViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong)GHFilterGroupVeiw *filterGroup;
 @property (nonatomic, strong)NSArray *datalist;
@@ -23,9 +25,11 @@
     GPUImageVideoCamera *videoCamera;
     GPUImageView *mainView;
     GPUImageFilter *mainFilter;
+    GPUImageMovieWriter * writer;
     GHTopBarView *topBar;
     GHBottomBarView *bottomBar;
     GHFilterManager *filtManager;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -56,6 +60,11 @@
 
 - (void)configBottomBarView{
     bottomBar = [[GHBottomBarView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 100, [UIScreen mainScreen].bounds.size.width, 100)];
+    __weak __typeof__(self) weakSelf = self;
+    bottomBar.shootBtnClick = ^(BOOL isSelec) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf onClick:isSelec];
+    };
     [self.view addSubview:bottomBar];
 }
 
@@ -90,7 +99,54 @@
     }
 }
 
+- (void)onClick:(BOOL)isSelected {
+    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie4.m4v"];
+    NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
+    if(isSelected) {
+        NSLog(@"Start recording");
+        unlink([pathToMovie UTF8String]); // 如果已经存在文件，AVAssetWriter会有异常，删除旧文件
+        writer = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(480.0, 640.0)];
+        writer.encodingLiveVideo = YES;
+        [mainFilter addTarget:writer];
+        videoCamera.audioEncodingTarget = writer;
+        [writer startRecording];
+        
+//        _mLabelTime = 0;
+//        _mLabel.hidden = NO;
+//        [self onTimer:nil];
+//        _mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:YES];
+    }
+    else {
+        NSLog(@"End recording");
+//        _mLabel.hidden = YES;
+//        if (_mTimer) {
+//            [_mTimer invalidate];
+//        }
+        [mainFilter removeTarget:writer];
+        videoCamera.audioEncodingTarget = nil;
+        [writer finishRecording];
+       
+        if (pathToMovie) {
+            if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(pathToMovie)) {
+                //保存相册核心代码
+                UISaveVideoAtPathToSavedPhotosAlbum(pathToMovie, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+            }
+        }
+    }
+}
 
+
+#pragma mark- 保存完毕的回调
+//保存视频完成之后的回调
+
+- (void)video:(id)image didFinishSavingWithError: (NSError *)error contextInfo: (void *)contextInfo {
+    if (error) {
+        NSLog(@"保存视频失败%@", error.localizedDescription);
+    }
+    else {
+        NSLog(@"保存视频成功");
+    }
+}
 
 #pragma mark- lazy
 - (GHFilterGroupVeiw *)filterGroup{
@@ -130,6 +186,7 @@
     [outPut addTarget:mainView];
     [videoCamera addTarget:outPut];
     [self.view addSubview:mainView];
+    mainFilter = outPut;
     [self.view bringSubviewToFront:self.filterGroup];
 
 }

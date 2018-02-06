@@ -30,14 +30,16 @@
     shootBtn.frame = CGRectMake(self.frame.size.width * 0.5 - 40, 15, 80, 80);
     shootBtn.backgroundColor = [UIColor whiteColor];
     [self addSubview:shootBtn];
-    
-    
-    
-    
-    
+    [shootBtn addTarget:self action:@selector(onclick) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
+- (void)onclick{
+    shootBtn.selected = !shootBtn.isSelected;
+    if (self.shootBtnClick) {
+        self.shootBtnClick(shootBtn.selected);
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
