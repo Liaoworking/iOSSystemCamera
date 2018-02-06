@@ -122,6 +122,18 @@
     
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    GPUImageOutput *outPut = self.datalist[indexPath.item];
+    [mainView removeFromSuperview];
+    mainView = [[GPUImageView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(topBar.frame), [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 150)];
+    [outPut addTarget:mainView];
+    [videoCamera addTarget:outPut];
+    [self.view addSubview:mainView];
+    [self.view bringSubviewToFront:self.filterGroup];
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
